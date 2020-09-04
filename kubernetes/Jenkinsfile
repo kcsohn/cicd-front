@@ -20,7 +20,7 @@ containerTemplate(name: 'kubectl', image: 'roffe/kubectl', command: 'cat', ttyEn
 
 		// #1 Github 소스 가져오기
 		stage('Get Source') {
-		  git credentialsId: '{GITHUB Credential ID}', url: '{GITHUB URL}', branch: 'master'
+		  git credentialsId: 'github-lab09', url: 'https://github.com/kcsohn/cicd-front', branch: 'master'
 		}
 
 		// #2 Properties 파일 읽기		
@@ -64,7 +64,7 @@ containerTemplate(name: 'kubectl', image: 'roffe/kubectl', command: 'cat', ttyEn
 		stage('Dockerizing') {
 		  container('docker') {
 		    docker.withRegistry("${dockerRegistry}", "${credentialRegistry}") {
-		      sh "docker build -f ./Dockerfile -t ${image}:${tag} ${WORKSPACE}"
+		      sh "docker build . -t ${image}:${tag}"
 		      sh "docker push ${image}:${tag}"
 		      sh "docker tag ${image}:${tag} ${image}:latest"
 		      sh "docker push ${image}:latest"
