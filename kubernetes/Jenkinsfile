@@ -37,7 +37,7 @@ containerTemplate(name: 'kubectl', image: 'roffe/kubectl', command: 'cat', ttyEn
 		def sonarQubeURL = props["sonarQubeURL"]
 		def sonarQubeProject = props["sonarQubeProject"]
 		def notifySlack(STATUS, COLOR) {
-		  slackSend channel: '#jenkins-alarm-lab09-test ', message: STATUS+" : " +
+		  slackSend channel: '#jenkins-alarm-lab09-test', message: STATUS+" : " +
 		"${env.JOB_NAME}[${env.BUILD_NUMBER}] (${env.BUILD_URL})", color: COLOR,
 		tokenCredentialId: 'slack-lab09 ', teamDomain: 'ibm-teck'
 		}
